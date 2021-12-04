@@ -4,7 +4,7 @@ jobs:
   job_test:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout Code
-    - uses: actions/checkout@v2
-    - name: Hello CI
-    - run: echo "HELLO!"
+      - name: Checkout Code
+      - uses: actions/checkout@v2
+      - name: Hello CI
+      - run: echo "HELLO!"
