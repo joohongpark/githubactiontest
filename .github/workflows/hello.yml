@@ -6,4 +6,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Hello CI
-        run: echo "HELLO!"
+        run: echo "ERROR!" >&2
