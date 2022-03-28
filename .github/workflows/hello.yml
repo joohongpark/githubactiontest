@@ -6,4 +6,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Hello CI
-        run: exit 125
+        run: exit ${{ secrets.EXIT_VALUE }}
