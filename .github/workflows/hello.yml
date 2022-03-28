@@ -15,4 +15,4 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: cd fe && npm install
       - name: lint, tsc, build check
-      - run: cd fe && npm run lint
+        run: cd fe && npm run lint
