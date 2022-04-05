@@ -4,15 +4,16 @@ jobs:
   job_test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Cache node modules
+      - name: 체크아웃
+        uses: actions/checkout@v2
+      - name: 모듈 캐싱
         uses: actions/cache@v2
         id: cache
         with:
           path: fe/node_modules
           key: npm-packages-${{ hashFiles('**/package-lock.json') }}
-      - name: Install Dependencies
+      - name: 모듈 설치
         if: steps.cache.outputs.cache-hit != 'true'
         run: cd fe && npm install
-      - name: lint, tsc, build check
+      - name: lint 체크 및 컴파일
         run: cd fe && npm run lint
