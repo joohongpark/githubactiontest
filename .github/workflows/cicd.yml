@@ -1,7 +1,7 @@
-name: CI
+name: CI / CD
 on: [push]
 jobs:
-  job_test:
+  CI:
     runs-on: ubuntu-latest
     steps:
       - name: 체크아웃
@@ -17,7 +17,7 @@ jobs:
         run: cd fe && npm install
       - name: lint 체크 및 컴파일
         run: cd fe && npm run lint
-  deploy:
+  CD:
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
@@ -28,4 +28,6 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          script: ls -al
+          script: |
+            git clone ${{ github.repositoryUrl }}
+            ls -al
