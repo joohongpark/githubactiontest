@@ -10,12 +10,11 @@ jobs:
         uses: actions/cache@v2
         with:
           path: |
-            ~/cache
-            ~/cache2
+            ~/gen_cache
           key: npm-packages-${{ hashFiles('**/test.txt') }}
         id: cache
       - name: 모듈들 설치
         if: steps.cache.outputs.cache-hit != 'true'
-        run: echo '캐시된 파일 갱신'
+        run: mkdir ~/gen_cache && echo '캐시된 파일 갱신' > ~/gen_cache/test.txt
       - name: ls
-        run: ls cache && ls cache2
+        run: ls gen_cache
