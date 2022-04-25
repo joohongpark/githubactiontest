@@ -11,7 +11,7 @@ jobs:
         with:
           path: |
             ${{ github.workspace }}/backend/node_modules
-            ${{ github.workspace }}/fe/node_modules
+            ${{ github.workspace }}/frontend/node_modules
           key: npm-packages-${{ hashFiles('**/package_lock.json') }}
         id: cache
       - name: 백앤드 모듈들 설치
@@ -19,9 +19,9 @@ jobs:
         run: cd backend && npm install
       - name: 프론트앤드 모듈들 설치
         if: steps.cache.outputs.cache-hit != 'true'
-        run: cd fe && npm install
+        run: cd frontend && npm install
       - name: 프론트앤드 lint 체크 및 컴파일 테스트
-        run: cd fe && npm run lint
+        run: cd frontend && npm run lint
       - name: 백앤드 lint 체크
         run: cd backend && npm run lint
       - name: 백앤드 빌드 체크
