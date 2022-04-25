@@ -44,5 +44,4 @@ jobs:
           port: ${{ secrets.PORT }}
           script_stop: true
           script: |
-            git clone ${{ github.repositoryUrl }}
-            echo ${{ github.action_repository }}
+            bash run.sh
