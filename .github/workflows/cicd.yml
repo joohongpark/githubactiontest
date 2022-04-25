@@ -11,6 +11,7 @@ jobs:
         with:
           path: |
             ~/cache
+            ~/cache2
           key: npm-packages-${{ hashFiles('**/test.txt') }}
         id: cache
       - name: 모듈들 설치
