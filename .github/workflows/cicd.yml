@@ -10,11 +10,20 @@ jobs:
         uses: actions/cache@v2
         with:
           path: |
-            ~/gen_cache
-          key: npm-packages-${{ hashFiles('**/test.txt') }}
+            backend/node_modules
+            fe/node_modules
+          key: npm-packages-${{ hashFiles('**/package_lock.json') }}
         id: cache
       - name: 모듈들 설치
         if: steps.cache.outputs.cache-hit != 'true'
-        run: mkdir ~/gen_cache && echo '캐시된 파일 갱신' > ~/gen_cache/test.txt
-      - name: ls
-        run: ls gen_cache
+        run: cd fe && npm install && cd backend && npm install
+      - name: 프론트앤드 lint 체크 및 컴파일 테스트
+        run: cd fe && npm run lint
+      - name: 백앤드 lint 체크
+        run: cd backend && npm run lint
+      - name: 백앤드 빌드 체크
+        run: cd backend && npm run build
+      - name: 백앤드 단위 테스트 체크
+        run: cd backend && npm run test
+      - name: 백앤드 통합 테스트 체크
+        run: cd backend && npm run test:e2e
