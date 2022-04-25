@@ -18,15 +18,3 @@ jobs:
         run: echo '캐시된 파일 갱신'
       - name: ls
         run: ls cache
-  CD:
-    if: github.ref == 'refs/heads/master'
-    runs-on: ubuntu-latest
-    steps:
-      - name: 리모트 쉘 접속
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          port: ${{ secrets.PORT }}
-          script: ls -al
