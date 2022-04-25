@@ -18,4 +18,4 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: echo '캐시된 파일 갱신'
       - name: ls
-        run: ls cache
+        run: ls cache && ls cache2
