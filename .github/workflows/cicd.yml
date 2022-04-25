@@ -9,7 +9,7 @@ jobs:
       - name: 모듈들 캐싱
         uses: actions/cache@v2
         with:
-          path: be/node_modules
+          path: ~/node_modules
           key: npm-packages-${{ hashFiles('**/package-lock.json') }}
         id: cache
       - name: 모듈들 설치
