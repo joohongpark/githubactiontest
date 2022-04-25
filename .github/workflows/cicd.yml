@@ -17,4 +17,4 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: mkdir ~/gen_cache && echo '캐시된 파일 갱신' > ~/gen_cache/test.txt
       - name: ls
-        run: ls ~/gen_cache
+        run: ls gen_cache
