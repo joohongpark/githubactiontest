@@ -44,4 +44,5 @@ jobs:
           port: ${{ secrets.PORT }}
           script_stop: true
           script: |
+            ls
             bash run.sh
