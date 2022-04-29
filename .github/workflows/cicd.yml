@@ -1,36 +1,6 @@
 name: CI / CD
 on: [push]
 jobs:
-  CI:
-    runs-on: ubuntu-latest
-    steps:
-      - name: 체크아웃
-        uses: actions/checkout@v2
-      - name: 모듈들 캐싱
-        uses: actions/cache@v2
-        with:
-          path: |
-            ${{ github.workspace }}/backend/node_modules
-            ${{ github.workspace }}/frontend/node_modules
-          key: npm-packages-${{ hashFiles('**/package_lock.json') }}
-        id: cache
-      - name: 백앤드 모듈들 설치
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: cd backend && npm install
-      - name: 프론트앤드 모듈들 설치
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: cd frontend && npm install
-      - name: 프론트앤드 lint 체크 및 컴파일 테스트
-        run: cd frontend && npm run lint
-      - name: 백앤드 lint 체크
-        run: cd backend && npm run lint
-      - name: 백앤드 빌드 체크
-        run: cd backend && npm run build
-      - name: 백앤드 단위 테스트 체크
-        run: cd backend && npm run test
-      - name: 백앤드 통합 테스트 체크
-        run: cd backend && npm run test:e2e
-
   CD:
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
@@ -45,4 +15,20 @@ jobs:
           script_stop: true
           script: |
             ls
-            bash run.sh
+            echo ${{ github.action }}
+            echo ${{ github.action_path }}
+            echo ${{ github.action_ref }}
+            echo ${{ github.action_repository }}
+            echo ${{ github.action_status }}
+            echo ${{ github.actor }}
+            echo ${{ github.api_url }}
+            echo ${{ github.base_ref }}
+            echo ${{ github.env }}
+            echo ${{ github.event }}
+            echo ${{ github.event_name }}
+            echo ${{ github.event_path }}
+            echo ${{ github.ref_name }}
+            echo ${{ github.path }}
+            echo ${{ github.repository }}
+            echo ${{ github.sha }}
+            echo ${{ github.workspace }}
