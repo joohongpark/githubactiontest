@@ -15,6 +15,7 @@ jobs:
           script_stop: true
           script: |
             ls
+            docker-compose -f ./PPoong/release-docker-compose.yaml down
             bash compose_stop.sh
             cd PPoong && git pull
             cd ..
