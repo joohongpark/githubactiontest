@@ -1,8 +1,9 @@
-name: CI / CD
+name: CD
 on: [push]
+
 jobs:
   CD:
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: 리모트 쉘 접속
@@ -14,21 +15,7 @@ jobs:
           port: ${{ secrets.PORT }}
           script_stop: true
           script: |
-            ls
-            echo ${{ github.action }}
-            echo ${{ github.action_path }}
-            echo ${{ github.action_ref }}
-            echo ${{ github.action_repository }}
-            echo ${{ github.action_status }}
-            echo ${{ github.actor }}
-            echo ${{ github.api_url }}
-            echo ${{ github.base_ref }}
-            echo ${{ github.env }}
-            echo ${{ github.event }}
-            echo ${{ github.event_name }}
-            echo ${{ github.event_path }}
-            echo ${{ github.ref_name }}
-            echo ${{ github.path }}
-            echo ${{ github.repository }}
-            echo ${{ github.sha }}
-            echo ${{ github.workspace }}
+            bash compose_stop.sh
+            cd PPoong && git pull
+            cd ..
+            bash run.sh
