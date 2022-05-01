@@ -14,7 +14,7 @@ jobs:
           port: ${{ secrets.PORT }}
           script_stop: true
           script: |
-            ls
+            env
             docker-compose -f ./PPoong/release-docker-compose.yaml down
             bash compose_stop.sh
             cd PPoong && git pull
