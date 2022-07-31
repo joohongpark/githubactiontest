@@ -15,4 +15,4 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             ./repository_pull.sh
-            ./24-not-enough/pm2-run.sh
+#            ./24-not-enough/pm2-run.sh
