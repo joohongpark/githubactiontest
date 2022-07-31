@@ -14,6 +14,7 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
+            source ~/.profile
             echo "해당 리포지토리로 이동"
             cd $HOME/24-not-enough
             echo "리포지토리 pull"
