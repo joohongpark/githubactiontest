@@ -2,19 +2,29 @@ name: CD
 on: [push]
 
 jobs:
-  CD:
+  CD-develop:
+    name: deploy-develop
     runs-on: ubuntu-latest
+    #if: ${{ github.ref == 'refs/heads/develop' }}
     steps:
+      - name: 소스코드 체크아웃
+        uses: actions/checkout@v2
+
+      - name: 체크아웃한 코드를 EC2 instance로 배포
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          SOURCE: "./"
+          REMOTE_HOST: ${{ secrets.EC2_HOST }}
+          REMOTE_USER: ${{ secrets.EC2_USER }}
+          TARGET: "/home/${{ secrets.EC2_USER }}/24-not-enough"
+
       - name: 리모트 쉘 접속
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
+          key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
-          script_stop: true
           script: |
-            bash compose_stop.sh
-            cd PPoong && git pull
-            cd ..
-            bash run.sh
+            ${{ secrets.EC2_USER }}/24-not-enough/pm2-run.sh
