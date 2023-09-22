@@ -7,10 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Env Test
-        run: echo "http://${METRIC_SERVER}:3100/loki/api/v1/push" | xxd
+        run: echo "http://${{ env.METRIC_SERVER }}:3100/loki/api/v1/push" | xxd
       - name: Env Test 2
-        run: echo "${METRIC_SERVER}" | xxd
+        run: echo "${{ secrets.METRIC_SERVER }}" | xxd
       - name: Env Test 3
-        run: echo ${METRIC_SERVER} | xxd
+        run: echo ${{ secrets.METRIC_SERVER }} | xxd
       - name: Env Test 4
         run: echo "http://${{ env.METRIC_SERVER }}:3100/loki/api/v1/push" | xxd
