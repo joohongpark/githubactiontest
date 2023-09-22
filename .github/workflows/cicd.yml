@@ -5,20 +5,6 @@ jobs:
   CD-develop:
     name: deploy-develop
     runs-on: ubuntu-latest
-    #if: ${{ github.ref == 'refs/heads/develop' }}
     steps:
-      - name: 리모트 쉘 접속
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          script: |
-            export NVM_DIR=~/.nvm
-            source ~/.nvm/nvm.sh
-            echo "해당 리포지토리로 이동"
-            cd $HOME/24-not-enough
-            echo "리포지토리 pull"
-            git pull origin develop
-            echo "앱 배포"
-            pm2 reload 24-not-enough
+      - name: Env Test
+        run: echo "http://${METRIC_SERVER}:3100/loki/api/v1/push" | xxd
